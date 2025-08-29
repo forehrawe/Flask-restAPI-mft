@@ -1,17 +1,17 @@
-from peewee import SqliteDatabase, Model, CharField,IntegerField, ForeignKeyField
+#Hadi Ghesmatpour
+from peewee import SqliteDatabase, Model, CharField, ForeignKeyField, IntegerField, DoesNotExist, FloatField
 
-db = SqliteDatabase('mydb.db') 
+db = SqliteDatabase('mydb.db')
 
 class Basemodel(Model):
     class Meta:
         database = db
         
-        
 class Teacher(Basemodel):
     name = CharField(max_length=10)
     family = CharField(max_length=15)
-    sucject = CharField(max_length=40)
-
+    subject = CharField(max_length=40)
+    
 class Student(Basemodel):
     name = CharField(max_length=10)
     family = CharField(max_length=15)
@@ -20,7 +20,7 @@ class Student(Basemodel):
 class Grade(Basemodel):
     teacher = ForeignKeyField(Teacher, on_delete='CASCADE')
     student = ForeignKeyField(Student, on_delete='CASCADE')
-    grade = IntegerField()
+    grade = FloatField()
     
 db.connect()
 db.create_tables([Teacher, Student, Grade])
