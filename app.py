@@ -66,7 +66,7 @@ def teachers():
         Student.create(name=data['name'], family=data['family'], subject=data['subject'])
         return jsonify({'status':'200'}), 200
     
-    teacher = Teacher.select()
+    teachers = Teacher.select()
     return jsonify([{'id':teacher.id, 'name':teacher.name, 'family':teacher.family, 'subject':teacher.subject} for teacher in teachers])
 
 @app.route('/teacher', methods=['PUT'])
